@@ -1,4 +1,5 @@
 import TaskList from './components/TaskList.jsx';
+import NewTaskForm from './components/NewTaskForm.jsx';
 import './App.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -53,12 +54,34 @@ const App = () => {
       });
   };
 
+  const convertFromApi = (apiTask) => {
+    const newTask = {
+      ...apiTask,
+      isComplete: apiTask.is_complete,
+    };
+    delete newTask.is_complete;
+    return newTask;
+  };
+
+  const handleSubmit = (taskData) => {
+    axios.post(`${API_BASE_URL}/tasks`, taskData)
+      .then((result) => {
+        setTasks((prevTasks) => [convertFromApi(result.data.task), ...prevTasks]);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
+        <div>
+          <NewTaskForm
+            handleSubmit={handleSubmit}
+          />
+        </div>
         <div>
           <TaskList
             tasks={tasks}
