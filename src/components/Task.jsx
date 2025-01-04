@@ -3,20 +3,20 @@ import './Task.css';
 
 const Task = ({ id, title, isComplete, onToggleComplete, onDeleteTask }) => {
   return (
-    <li className="task">
-      <span
+    <li className="tasks__item">
+      <button
         className={`tasks__item__toggle ${
           isComplete ? 'tasks__item__toggle--completed' : ''
         }`}
         onClick={() => onToggleComplete(id, isComplete)}
       >
         {title}
-      </span>
+      </button>
       <button
-        className="task__button task__button--delete"
+        className="tasks__item__remove button"
         onClick={() => onDeleteTask(id)}
       >
-        Delete
+        x
       </button>
     </li>
   );

@@ -14,7 +14,7 @@ const App = () => {
         const formattedTasks = response.data.map((task) => ({
           id: task.id,
           title: task.title,
-          isComplete: task.completed_at !== null,
+          isComplete: task.is_complete,
         }));
         setTasks(formattedTasks);
       })
