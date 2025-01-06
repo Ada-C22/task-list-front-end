@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const API_BASE_URL = import.meta.env.API_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
   useEffect(() => {
     axios
